@@ -1,5 +1,5 @@
 #!/bin/bash
-# 一键安装 VLESS + Reality 并生成 v2rayN 链接
+# 一键安装 VLESS + Reality 并输出可直接导入 v2rayN 的链接
 set -e
 
 # 检查 root
@@ -60,13 +60,13 @@ cat > /usr/local/etc/xray/config.json <<EOF
 }
 EOF
 
-# 启动 Xray
+# 启动并自启 Xray
 systemctl enable xray
 systemctl restart xray
 
-# 输出可直接导入的 v2rayN 链接
+# 输出可直接导入 v2rayN 的 vless:// 链接
 IP=$(curl -s ipv4.icanhazip.com)
 VLESS_LINK="vless://$UUID@$IP:$PORT?encryption=none&security=reality&sni=$DEST&fp=chrome&pbk=$PUBLIC_KEY&type=tcp&flow=xtls-rprx-vision#VLESS-Reality"
 
-echo -e "\n✅ 安装完成！直接复制下面链接到 v2rayN 或 Clash 即可使用：\n"
+echo -e "\n✅ 安装完成！直接复制下面链接到 v2rayN / Clash 即可使用：\n"
 echo "$VLESS_LINK"
