@@ -1,5 +1,5 @@
 #!/bin/bash
-# 一键安装 VLESS + Reality 并输出可直接导入 v2rayN 的链接
+# 一键安装 VLESS + Reality 并生成可直接导入 v2rayN 的链接
 set -e
 
 # 检查 root
@@ -8,10 +8,10 @@ if [ "$(id -u)" -ne 0 ]; then
   exit 1
 fi
 
-# 安装依赖
+echo "更新系统并安装依赖..."
 apt update -y && apt install -y curl socat
 
-# 安装 Xray
+echo "安装 Xray..."
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
 
 # 生成 UUID
